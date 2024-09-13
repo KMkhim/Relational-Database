@@ -76,13 +76,15 @@ from freecodecamp
 
     DROP TABLE second_table;
 
-### Serial type
+#### Serial type
 
 The SERIAL type will make your column an INT with a NOT NULL constraint, and automatically increment the integer when a new row is added. View the details of the characters table to see what SERIAL did for you.
 
-### Create characters table
+## Create characters Table
 
-<img>
+<img width="841" alt="Screenshot 2567-09-13 at 14 30 14" src="https://github.com/user-attachments/assets/808e1cd7-35ae-4ceb-8544-8a4c3f7b8e65">
+</br>
+<img width="456" alt="Screenshot 2567-09-13 at 14 46 09" src="https://github.com/user-attachments/assets/9b4093b7-86eb-482f-ac50-5911ae199b90">
 
 #### Update roll
 
@@ -92,20 +94,18 @@ The SERIAL type will make your column an INT with a NOT NULL constraint, and aut
 
     SELECT * FROM characters ORDER BY character_id ;
 
-<img>
 
 #### Primary Key
 You should set a primary key on every table and there can only be one per table. 
 
     ALTER TABLE characters  ADD PRIMARY KEY(name);
 
-<img>
 
 #### DROP Primary Key
 
     ALTER TABLE characters DROP CONSTRAINT characters_pkey;
 
-#### CREATE more_info table
+## CREATE more_info Table
 
     CREATE TABLE more_info();
 ####   
@@ -118,7 +118,8 @@ You should set a primary key on every table and there can only be one per table.
 #### Foreign Key
 
     ALTER TABLE more_info ADD COLUMN character_id INT REFERENCES characters(character_id);
-    <img>
+
+<img width="753" alt="Screenshot 2567-09-13 at 15 24 28" src="https://github.com/user-attachments/assets/0f0b47fd-28ed-4bea-9ca5-66943869522f">
 
 #### UNIQUE
 
@@ -130,9 +131,10 @@ There's your foreign key at the bottom. These tables have a "one-to-one" relatio
     ALTER TABLE more_info  ALTER COLUMN character_id  SET NOT NULL;
 
 #### more_info table
-<img>
 
-#### create sounds table
+<img width="551" alt="Screenshot 2567-09-13 at 16 05 07" src="https://github.com/user-attachments/assets/63b2ea4b-0d34-4628-be70-c1e8d6460e3c">
+
+## create sounds table
 
     CREATE TABLE sounds(sound_id SERIAL PRIMARY KEY);
 ####
@@ -146,10 +148,10 @@ There's your foreign key at the bottom. These tables have a "one-to-one" relatio
     INSERT INTO sounds(filename ,character_id) VALUES('oh-yeah.wav',4);
     INSERT INTO sounds(filename ,character_id) VALUES('yay.wav',5),('woo-hoo.wav',5);
     INSERT INTO sounds(filename ,character_id) VALUES('mm-hmm.wav',5),('yahoo.wav',3);
-   
-    <img>
 
-#### create actions table
+<img width="327" alt="Screenshot 2567-09-13 at 16 26 34" src="https://github.com/user-attachments/assets/2b91a6f6-692a-471d-b671-0c71be2d6c4d">
+
+## Create actions Table
     CREATE TABLE actions(action_id SERIAL PRIMARY KEY);
 ####
     ALTER TABLE actions ADD COLUMN action VARCHAR(20) UNIQUE NOT NULL;
@@ -157,9 +159,10 @@ There's your foreign key at the bottom. These tables have a "one-to-one" relatio
     INSERT INTO actions(action) VALUES ('run');
     INSERT INTO actions(action) VALUES ('jump');
     INSERT INTO actions(action) VALUES ('duck');
-    <img>
 
-#### create character_actions table
+<img width="308" alt="Screenshot 2567-09-13 at 16 31 52" src="https://github.com/user-attachments/assets/0be2bc4c-c763-49c2-9b08-f8e6963e7804">
+
+## Create character_actions Table
 
     CREATE TABLE character_actions();
 ####
@@ -173,8 +176,7 @@ There's your foreign key at the bottom. These tables have a "one-to-one" relatio
     ALTER TABLE character_actions ADD PRIMARY KEY (character_id , action_id);
 
     ALTER TABLE character_actions ADD UNIQUE(character_id,action_id);
-####
-    <img>
+
 ####
     INSERT INTO character_actions (character_id,action_id) VALUES(9,1),(9,2),(9,3);
     INSERT INTO character_actions (character_id,action_id) VALUES(8,1),(8,2),(8,3);
@@ -184,16 +186,22 @@ There's your foreign key at the bottom. These tables have a "one-to-one" relatio
     INSERT INTO character_actions (character_id,action_id) VALUES(4,1),(4,2),(4,3);
     INSERT INTO character_actions (character_id,action_id) VALUES(3,1),(3,2),(3,3);
 
-<img>
-####
+<img width="363" alt="Screenshot 2567-09-13 at 16 52 15" src="https://github.com/user-attachments/assets/80d504aa-7bc7-42a1-8b46-62bfbf2c9595">
+
+## ... FULL JOIN ... ON ....
 
     SELECT * FROM characters FULL JOIN more_info ON characters.character_id = more_info.character_id;
 
-     <img>
+<img width="967" alt="Screenshot 2567-09-13 at 17 00 02" src="https://github.com/user-attachments/assets/7f8746e6-ea48-49c8-baf1-f525b873e3e5">
+     
 ####
    
     SELECT * FROM characters FULL JOIN sounds ON characters.character_id = sounds.character_id;
+
+
+
 ####
 
     SELECT * FROM character_actions FULL JOIN characters ON character_actions.character_id = characters.character_id FULL JOIN actions ON character_actions.action_id = actions.action_id;
-    <img>
+
+<img width="800" alt="Screenshot 2567-09-13 at 17 10 28" src="https://github.com/user-attachments/assets/11d07d77-2483-450a-8fc3-5f275cadce28">
